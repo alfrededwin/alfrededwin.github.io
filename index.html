@@ -7,7 +7,7 @@
     <meta name="keywords" content="Bootstrap, Parallax, Template, Registration, Landing">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Grayrids">
-    <title>Mate - Parallax Website Template</title>
+    <title>Mate - COVID - 19 Live Update</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -22,7 +22,54 @@
     <link rel="stylesheet" href="css/main.css">    
     <link rel="stylesheet" href="css/responsive.css">
 
-  </head>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>    
+  <script>
+    var currentTimeout;
+    $(function(){
+      $(".navbar-brand").text($("title").text());
+      appSetTimeout();
+    });
+
+    function appSetTimeout() {
+      function refreshData() {
+        $.ajax({
+          url: "http://hpb.health.gov.lk/api/get-current-statistical",
+          type: "GET",
+          success: function(inData){
+            //console.log(inData);
+            inData.data.local_total_cases = inData.data.local_total_cases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            inData.data.local_new_cases = inData.data.local_new_cases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            inData.data.local_recovered = inData.data.local_recovered.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            inData.data.local_deaths = inData.data.local_deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            inData.data.local_new_deaths = inData.data.local_new_deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            
+            if(inData.success == true) {
+              $("#last_updated_time").text(inData.data.update_date_time);
+              $("#last_updated_time_more").text(inData.data.update_date_time);
+              $("#local_total_cases").text(inData.data.local_total_cases);
+              $("#local_new_cases").text(inData.data.local_new_cases);
+              $("#local_recovered").text(inData.data.local_recovered);
+              $("#local_deaths").text(inData.data.local_deaths);
+              $("#local_new_deaths").text(inData.data.local_new_deaths);
+            }
+          
+          }
+
+        });
+      }
+
+      refreshData();
+      if(currentTimeout != null) {
+        window.clearTimeout(currentTimeout);
+      }
+      currentTimeout = window.setTimeout(function() {
+        appSetTimeout();
+      }, 500000);
+    };
+   </script>
+</head>
+
   <body>
 
     <!-- Header Section Start -->
@@ -111,6 +158,65 @@
       </div>           
     </header>
     <!-- Header Section End --> 
+
+    <!-- Counter Section Start -->
+    <div class="counters section" data-stellar-background-ratio="0.5">
+      <div class="container">
+        <div class="section-title" data-aos="fade-up">
+          <h1>COVID-19 Statistics in Sri Lanka</h1>
+          <p class="description">Last updated on: <span id="last_updated_time">-</span></p>
+        </div>
+
+
+        <div class="row"> 
+          <div class="col-sm-6 col-md-3 col-lg-3">
+            <div class="facts-item">   
+              <div class="icon">
+                <i class="lnr lnr-clock"></i>
+              </div>             
+              <div class="fact-count">
+                <h3><span class="counter">1589</span></h3>
+                <h4>Working Hours</h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-3 col-lg-3">
+            <div class="facts-item">   
+              <div class="icon">
+                <i class="lnr lnr-briefcase"></i>
+              </div>            
+              <div class="fact-count">
+                <h3><span class="counter">699</span></h3>
+                <h4>Completed Projects</h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-3 col-lg-3">
+            <div class="facts-item"> 
+              <div class="icon">
+                <i class="lnr lnr-user"></i>
+              </div>              
+              <div class="fact-count">
+                <h3><span class="counter">203</span></h3>
+                <h4>No. of Clients</h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-3 col-lg-3">
+            <div class="facts-item"> 
+              <div class="icon">
+                <i class="lnr lnr-heart"></i>
+              </div>              
+              <div class="fact-count">
+                <h3><span class="counter">1689</span></h3>
+                <h4>Peoples Love</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Counter Section End -->
 
     <!-- Services Section Start -->
     <section id="services" class="section">
@@ -397,58 +503,7 @@
     </div>
     <!-- End Pricing Table Section -->
 
-    <!-- Counter Section Start -->
-    <div class="counters section" data-stellar-background-ratio="0.5">
-      <div class="container">
-        <div class="row"> 
-          <div class="col-sm-6 col-md-3 col-lg-3">
-            <div class="facts-item">   
-              <div class="icon">
-                <i class="lnr lnr-clock"></i>
-              </div>             
-              <div class="fact-count">
-                <h3><span class="counter">1589</span></h3>
-                <h4>Working Hours</h4>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-3 col-lg-3">
-            <div class="facts-item">   
-              <div class="icon">
-                <i class="lnr lnr-briefcase"></i>
-              </div>            
-              <div class="fact-count">
-                <h3><span class="counter">699</span></h3>
-                <h4>Completed Projects</h4>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-3 col-lg-3">
-            <div class="facts-item"> 
-              <div class="icon">
-                <i class="lnr lnr-user"></i>
-              </div>              
-              <div class="fact-count">
-                <h3><span class="counter">203</span></h3>
-                <h4>No. of Clients</h4>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-3 col-lg-3">
-            <div class="facts-item"> 
-              <div class="icon">
-                <i class="lnr lnr-heart"></i>
-              </div>              
-              <div class="fact-count">
-                <h3><span class="counter">1689</span></h3>
-                <h4>Peoples Love</h4>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Counter Section End -->
+    
 
     <!-- Team section Start -->
     <section id="team" class="section">
