@@ -24,50 +24,64 @@
 
 
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>    
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script>
-    var currentTimeout;
-    $(function(){
-      $(".navbar-brand").text($("title").text());
-      appSetTimeout();
-    });
+      var currentTimeout;
+      $(function() {
+          $(".navbar-brand").text($("title").text());
+          appSetTimeout();
+      });
 
-    function appSetTimeout() {
-      function refreshData() {
-        $.ajax({
-          url: "http://hpb.health.gov.lk/api/get-current-statistical",
-          type: "GET",
-          success: function(inData){
-            //console.log(inData);
-            inData.data.local_total_cases = inData.data.local_total_cases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            inData.data.local_new_cases = inData.data.local_new_cases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            inData.data.local_recovered = inData.data.local_recovered.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            inData.data.local_deaths = inData.data.local_deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            inData.data.local_new_deaths = inData.data.local_new_deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            
-            if(inData.success == true) {
-              $("#last_updated_time").text(inData.data.update_date_time);
-              $("#last_updated_time_more").text(inData.data.update_date_time);
-              $("#local_total_cases").text(inData.data.local_total_cases);
-              $("#local_new_cases").text(inData.data.local_new_cases);
-              $("#local_recovered").text(inData.data.local_recovered);
-              $("#local_deaths").text(inData.data.local_deaths);
-              $("#local_new_deaths").text(inData.data.local_new_deaths);
-            }
-          
+      function appSetTimeout() {
+          function refreshData() {
+              $.ajax({
+                  url: "http://hpb.health.gov.lk/api/get-current-statistical",
+                  type: "GET",
+                  success: function(inData) {
+                      // console.log(inData);
+                      inData.data.local_total_cases = inData.data.local_total_cases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                      inData.data.local_new_cases = inData.data.local_new_cases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                      inData.data.local_recovered = inData.data.local_recovered.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                      inData.data.local_deaths = inData.data.local_deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                      inData.data.local_new_deaths = inData.data.local_new_deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+
+                      inData.data.global_total_cases = inData.data.global_total_cases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                      inData.data.global_new_cases = inData.data.global_new_cases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                      inData.data.global_recovered = inData.data.global_recovered.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                      inData.data.global_deaths = inData.data.global_deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                      inData.data.global_new_deaths = inData.data.global_new_deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+                      if (inData.success == true) {
+                          $("#last_updated_time").text(inData.data.update_date_time);
+                          $("#last_updated_time_more").text(inData.data.update_date_time);
+                          $("#local_total_cases").text(inData.data.local_total_cases);
+                          $("#local_new_cases").text(inData.data.local_new_cases);
+                          $("#local_recovered").text(inData.data.local_recovered);
+                          $("#local_deaths").text(inData.data.local_deaths);
+                          $("#local_new_deaths").text(inData.data.local_new_deaths);
+
+
+                          $("#global_total_cases").text(inData.data.global_total_cases);
+                          $("#global_new_cases").text(inData.data.global_new_cases);
+                          $("#global_recovered").text(inData.data.global_recovered);
+                          $("#global_deaths").text(inData.data.global_deaths);
+                          $("#global_new_deaths").text(inData.data.global_new_deaths);
+                      }
+                  }
+              });
           }
 
-        });
-      }
+          refreshData();
+          if (currentTimeout != null) {
+              window.clearTimeout(currentTimeout);
 
-      refreshData();
-      if(currentTimeout != null) {
-        window.clearTimeout(currentTimeout);
-      }
-      currentTimeout = window.setTimeout(function() {
-        appSetTimeout();
-      }, 500000);
-    };
-   </script>
+          }
+          currentTimeout = window.setTimeout(function() {
+              appSetTimeout();
+          }, 500000);
+      };
+  </script>
 </head>
 
   <body>
@@ -177,7 +191,7 @@
               </div>             
               <div class="fact-count">
                 <h3><span class="counter" id="local_total_cases">-</span></h3>
-                <h4>Total Cases</h4>
+                <h4 class="title">Total Cases</h4>
               </div>
             </div>
           </div>
