@@ -43,7 +43,9 @@
                       inData.data.local_recovered = inData.data.local_recovered.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                       inData.data.local_deaths = inData.data.local_deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                       inData.data.local_new_deaths = inData.data.local_new_deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                      inData.data.local_active_cases = inData.data.local_active_cases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
+                      
 
                       inData.data.global_total_cases = inData.data.global_total_cases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                       inData.data.global_new_cases = inData.data.global_new_cases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -59,6 +61,7 @@
                           $("#local_recovered").text(inData.data.local_recovered);
                           $("#local_deaths").text(inData.data.local_deaths);
                           $("#local_new_deaths").text(inData.data.local_new_deaths);
+                          $("#local_active_cases").text(inData.data.local_active_cases);
 
 
                           $("#global_total_cases").text(inData.data.global_total_cases);
@@ -171,6 +174,7 @@
       </div>           
     </header>
     <!-- Header Section End --> 
+    
 
     <!-- Counter Section Start -->
   <section id="stats" class="services">
@@ -190,18 +194,10 @@
               </div>             
               <div class="fact-count">
                 <h3><span class="counter" id="local_total_cases">-</span></h3>
-                <h4 class="title">Total Cases</h4>
+                <h4 class="title">Total Confirmed Cases</h4>
               </div>
             </div>
           </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon-box">
-                <div class="icon"><i class="fas fa-ambulance"></i></div>
-                <h4 class="title"><a href="">Total Cases</a></h4>
-                <p class="description"><span id="local_total_cases">-</span></p>
-            </div>
-        </div>
 
           <div class="col-sm-6 col-md-3 col-lg-3">
             <div class="facts-item">   
@@ -209,33 +205,48 @@
                 <i class="lnr lnr-briefcase"></i>
               </div>            
               <div class="fact-count">
-                <h3><span class="counter">699</span></h3>
-                <h4>Completed Projects</h4>
+                <h3><span class="counter" id="local_active_cases">-</span></h3>
+                <h4>Total Active Cases</h4>
               </div>
             </div>
           </div>
+
           <div class="col-sm-6 col-md-3 col-lg-3">
             <div class="facts-item"> 
               <div class="icon">
                 <i class="lnr lnr-user"></i>
               </div>              
               <div class="fact-count">
-                <h3><span class="counter">203</span></h3>
-                <h4>No. of Clients</h4>
+                <h3><span class="counter" id="local_new_cases">-</span></h3>
+                <h4>New Cases</h4>
               </div>
             </div>
           </div>
+
           <div class="col-sm-6 col-md-3 col-lg-3">
             <div class="facts-item"> 
               <div class="icon">
                 <i class="lnr lnr-heart"></i>
               </div>              
               <div class="fact-count">
-                <h3><span class="counter">1689</span></h3>
-                <h4>Peoples Love</h4>
+                <h3><span class="counter" id="local_recovered">-</span></h3>
+                <h4>Recovered & Discharged</h4>
               </div>
             </div>
           </div>
+
+          <div class="col-sm-6 col-md-3 col-lg-3">
+            <div class="facts-item"> 
+              <div class="icon">
+                <i class="lnr lnr-heart"></i>
+              </div>              
+              <div class="fact-count">
+                <h3><span class="counter" id="local_deaths">-</span></h3>
+                <h4>Deaths</h4>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
