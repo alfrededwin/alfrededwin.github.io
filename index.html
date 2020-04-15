@@ -38,7 +38,10 @@
                   type: "GET",
                   success: function(inData) {
                       // console.log(inData);
-                      inData.data.local_total_cases = inData.data.local_total_cases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                      //inData.data.local_total_cases = inData.data.local_total_cases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+                      inData.data.local_total_cases = inData.data.local_total_cases.toString();
+                     
                       inData.data.local_new_cases = inData.data.local_new_cases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                       inData.data.local_recovered = inData.data.local_recovered.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                       inData.data.local_deaths = inData.data.local_deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
